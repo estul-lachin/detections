@@ -270,6 +270,9 @@ def render_index(rules, results, hits=None, soar=None):
 
 <h2>Rules</h2>
 <ul class="rules">{"".join(cards)}</ul>
+<p class="meta">Honeypot #2, a real Debian server, is watched by Wazuh XML rules outside this pipeline:
+  <a href="https://github.com/estul-lachin/uig-honeypot/tree/main/hp2">the rules and how each was verified</a>,
+  and the intrusion that led to most of them, <a href="https://honeypot.uig.me/inc-001.html">INC-001</a>.</p>
 """
     return page("Detection-as-code · Estul Lachin", body, 0,
                 "Sigma detections for SSH and Telnet attacks and the network traffic around them (Cowrie and "

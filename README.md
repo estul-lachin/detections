@@ -15,6 +15,9 @@ says which one it reads:
 
 A temporal correlation can combine both, grouped by `src_ip` (the remote address in both).
 
+Honeypot #2, a real Debian server, isn't covered here. Its Wazuh XML rules, and how each one was verified,
+are in uig-honeypot's [`hp2/`](https://github.com/estul-lachin/uig-honeypot/tree/main/hp2).
+
 ```
 rules/<name>.yml           Sigma rule (a correlation file also holds its named base rules)
 tests/<name>/match.jsonl   events the rule must detect
