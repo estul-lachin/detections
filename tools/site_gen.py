@@ -58,12 +58,12 @@ def page(title, body, depth, description):
 <body>
 <header class="site-header">
   <div class="wrap">
-    <a class="brand" href="https://uig.me/">Estul Lachin</a>
+    <div class="crumb"><a class="brand" href="https://uig.me/">Estul Lachin</a><a class="section" href="{rel or './'}">Detections</a></div>
     <nav>
-      <a href="https://lab.uig.me/">Labs</a>
-      <a href="https://honeypot.uig.me/">Honeypot</a>
-      <a href="{rel or './'}" aria-current="page">Detections</a>
-      <a href="https://guide.uig.me/">Guide</a>
+      <a href="https://uig.me/#work" aria-current="page">Work</a>
+      <a href="https://uig.me/incidents/">Incident reports</a>
+      <a href="https://uig.me/about/">About</a>
+      <a href="https://uig.me/Estul-Lachin-Resume.pdf">Résumé</a>
     </nav>
   </div>
 </header>
