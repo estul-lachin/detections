@@ -70,7 +70,7 @@ sessions, so the playbook waits its 10 minutes.
 ## Published numbers
 
 CI runs `tools/soar_stats.py` on main and publishes `soar.json` and an "Automated response" section on
-detections.uig.me, plus a `soar` block in `summary.json` that uig.me shows. It logs in with GitHub OIDC
+uig.me/detections, plus a `soar` block in `summary.json` that uig.me shows. It logs in with GitHub OIDC
 (`soar/grant-ci.sh`: an app registration with a federated credential for `main` and one role, Log
 Analytics Reader on the workspace), so no secret is stored. The counts start when the enrichment
 automation went live and leave out incidents tagged `soar:legacy` (closed in bulk when the rules switched

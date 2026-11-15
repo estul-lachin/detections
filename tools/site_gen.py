@@ -1,4 +1,4 @@
-"""Render detections.uig.me from the rules, test results and converted queries.
+"""Render uig.me/detections from the rules, test results and converted queries.
 
 Plain HTML and CSS, no JavaScript. Every value from a rule or from the honeypot is escaped.
 
@@ -17,7 +17,7 @@ from sigma.data import mitre_attack
 
 ROOT = Path(__file__).resolve().parent.parent
 REPO = "https://github.com/estul-lachin/uig-detections"
-SITE = "https://detections.uig.me"
+SITE = "https://uig.me/detections"
 LEVELS = ["critical", "high", "medium", "low", "informational"]
 TACTIC_ORDER = ["reconnaissance", "resource-development", "initial-access", "execution", "persistence",
                 "privilege-escalation", "stealth", "defense-impairment", "credential-access", "discovery",
@@ -166,7 +166,7 @@ def seen_section(rf, hits):
                      "attackers' source IPs are never published):</p>"
                      f'<pre class="code"><code>{e(str(h["example"]))}</code></pre>')
     return (f'<h2>Seen on the honeypot</h2>\n{text}\n<p class="meta">Counted by running this rule\'s Sigma '
-            f'logic on the <a href="https://honeypot.uig.me/">honeypot</a>\'s raw logs every hour.</p>')
+            f'logic on the <a href="https://uig.me/honeypot/">honeypot</a>\'s raw logs every hour.</p>')
 
 
 def soar_section(soar):
@@ -236,7 +236,7 @@ def render_index(rules, results, hits=None, soar=None):
   <p class="lead">Detections for SSH and Telnet attacks and the network traffic around them, written once in
     <a href="https://sigmahq.io/">Sigma</a> and converted to Splunk SPL and Microsoft Sentinel KQL. Every rule is
     tested in CI against attack events that must match and look-alike events that must not. The behaviour comes
-    from the <a href="https://honeypot.uig.me/">live honeypot</a>: Cowrie's shell sessions and the Suricata IDS
+    from the <a href="https://uig.me/honeypot/">live honeypot</a>: Cowrie's shell sessions and the Suricata IDS
     beside it, joined by source IP where a rule needs both.</p>
 </section>
 <div class="stats">
@@ -271,7 +271,7 @@ def render_index(rules, results, hits=None, soar=None):
 <ul class="rules">{"".join(cards)}</ul>
 <p class="meta">Honeypot #2, a real Debian server, is watched by Wazuh XML rules outside this pipeline:
   <a href="https://github.com/estul-lachin/uig-honeypot/tree/main/hp2">the rules and how each was verified</a>,
-  and the intrusion that led to most of them, <a href="https://honeypot.uig.me/inc-001.html">INC-001</a>.</p>
+  and the intrusion that led to most of them, <a href="https://uig.me/honeypot/inc-001.html">INC-001</a>.</p>
 """
     return page("Detection-as-code · Estul Lachin", body, 0,
                 "Sigma detections for SSH and Telnet attacks and the network traffic around them (Cowrie and "
@@ -368,7 +368,7 @@ def render(rules, results, outputs, out_dir, hits=None, soar=None):
     (out / "summary.json").write_text(json.dumps(summary(rules, results, soar), indent=1) + "\n", encoding="utf-8")
     if soar:
         (out / "soar.json").write_text(json.dumps(soar, indent=1) + "\n", encoding="utf-8")
-    for f in ("style.css", "favicon.svg", "og-image.png", "CNAME", "404.html"):
+    for f in ("style.css", "favicon.svg", "og-image.png", "404.html"):
         src = ROOT / "site" / f
         if src.exists():
             shutil.copyfile(src, out / f)

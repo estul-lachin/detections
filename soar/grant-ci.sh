@@ -7,7 +7,7 @@ set -euo pipefail
 
 RG=${SOAR_RG:-rg-uig-sentinel}
 WS=${SOAR_WORKSPACE:-law-uig-honeypot}
-REPO=${SOAR_REPO:-estul-lachin/uig-detections}
+REPO=${SOAR_REPO:-estul-lachin/detections}
 APP=uig-detections-ci
 
 app_id=$(az ad app list --display-name "$APP" --query '[0].appId' -o tsv)
@@ -35,8 +35,10 @@ add_subject() { # name subject
     echo "added federated credential for $2"
   fi
 }
-add_subject github-main "repo:$REPO:ref:refs/heads/main"
-add_subject github-main-ids "$ids_subject"
+# The credential names carry the repo name: after a repo rename the subjects change, and a second
+# credential cannot reuse an existing name.
+add_subject "github-main-${REPO##*/}" "repo:$REPO:ref:refs/heads/main"
+add_subject "github-main-ids-${REPO##*/}" "$ids_subject"
 
 scope=$(az monitor log-analytics workspace show -g "$RG" -n "$WS" --query id -o tsv)
 if [ -z "$(az role assignment list --assignee "$sp_id" --role "Log Analytics Reader" --scope "$scope" --query '[0].id' -o tsv)" ]; then

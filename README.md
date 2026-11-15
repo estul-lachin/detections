@@ -2,10 +2,10 @@
 
 Detection-as-code for SSH and Telnet attacks: [Sigma](https://sigmahq.io/) rules, tested against attack
 and look-alike events, converted to Splunk SPL and Microsoft Sentinel KQL. Published at
-**https://detections.uig.me**.
+**https://uig.me/detections**.
 
 The behaviour comes from a live [Cowrie honeypot](https://github.com/estul-lachin/uig-honeypot)
-([honeypot.uig.me](https://honeypot.uig.me)) and the Suricata IDS beside it. A rule's `logsource.product`
+([uig.me/honeypot](https://uig.me/honeypot)) and the Suricata IDS beside it. A rule's `logsource.product`
 says which one it reads:
 
 | product | fields | Splunk | Sentinel |
