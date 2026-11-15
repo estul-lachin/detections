@@ -20,7 +20,13 @@ title: Cowrie Successful Login (Reputation Correlation)
 name: cowrie_login_success
 id: bbc6bc1b-35ec-4dba-b467-da1d659468a9
 status: experimental
-description: Base rule for the blocklisted-source-login correlation.
+description: |
+  Base rule for the blocklisted-source-login correlation.
+  Excludes logins that aren't credentials: a scanner sending HTTP, SIP or RTSP to the Telnet port,
+  whose request line Cowrie records as the username, and an empty username, which is how Cowrie records
+  a Telnet login bypass (USER=-f root; telnet_exploit_attempt covers that). Evidence: the Honeypot #1
+  backlog cleanup of 2026-11-14 closed 11 incidents raised on such logins as false positives; over the
+  14 days before, 83 probe and 22 empty-username logins, none with a credential-like pair.
 author: Estul Lachin
 date: 2026-11-10
 logsource:
@@ -28,7 +34,18 @@ logsource:
 detection:
   selection:
     eventid: cowrie.login.success
-  condition: selection
+  probe_method:
+    username|re: '^(GET|POST|HEAD|PUT|DELETE|OPTIONS|CONNECT|PATCH) '
+  probe_version:
+    username|contains:
+      - 'HTTP/1.'
+      - 'SIP/2.0'
+      - 'RTSP/1.'
+  # A missing username is null in the evaluator and Splunk but "" in KQL: exclude both.
+  empty_username:
+    - username|re: '^\s*$'
+    - username: null
+  condition: selection and not (probe_method or probe_version or empty_username)
 level: informational
 ---
 title: Blocklisted Source Logs In

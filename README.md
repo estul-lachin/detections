@@ -65,7 +65,7 @@ After changing `tools/sigma_eval.py`, copy it to uig-honeypot's `vps/sigma_eval.
 5. **Sentinel check**: `tools/sentinel_check.py` uploads the test events to separate `Cowrie_Test_CL` and
    `Suricata_Test_CL` tables through their own data collection rule (uig-honeypot's
    `azure/suricata.sh --test` sets up the Suricata one), runs each rule's KQL scoped to that rule's events,
-   and requires the same result. All 17 rules agree with the evaluator in both Splunk and Sentinel.
+   and requires the same result. All 18 rules agree with the evaluator in both Splunk and Sentinel.
 6. **Deploy**: `tools/sentinel_deploy.py` creates or updates one scheduled analytics rule per Sigma rule.
    The honeypot ships new events every 10 minutes (uig-honeypot's `vps/sentinel.py`), so each run, every
    15 minutes, looks at what was *ingested* since the previous run (`ingestion_time()`) instead of a
