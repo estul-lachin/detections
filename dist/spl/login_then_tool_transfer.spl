@@ -5,7 +5,7 @@
 | eval usernameCondition=if(isnotnull(usernameMatch), "true", "false")
 | rex field=username "(?<usernameMatch2>^\\s*$)"
 | eval usernameCondition2=if(isnotnull(usernameMatch2), "true", "false")
-| search eventid="cowrie.login.success" NOT (usernameCondition="true" OR username IN ("*HTTP/1.*", "*SIP/2.0*", "*RTSP/1.*") OR usernameCondition2="true" OR NOT username=*) | eval event_type="cowrie_login_success" ]
+| search eventid="cowrie.login.success" NOT (usernameCondition="true" OR username IN ("*HTTP/1.*", "*SIP/2.0*", "*RTSP/1.*") OR usernameCondition2="true" OR username="" OR NOT username=*) | eval event_type="cowrie_login_success" ]
 [ search index=honeypot sourcetype=cowrie:json 
 | rex field=input "(?<inputMatch>\\b(wget|curl|tftp|ftpget|scp)\\b|/dev/tcp/|echo\\s+-[a-z]*e[a-z]*\\s+[\"']?(\\\\x[0-9a-fA-F]{2}){4})"
 | eval inputCondition=if(isnotnull(inputMatch), "true", "false")

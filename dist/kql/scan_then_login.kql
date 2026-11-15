@@ -1,6 +1,6 @@
 // Scanned Then Logged In. Generated from rules/scan_then_login.yml by tools/build.py; do not edit.
 union
     (Suricata_CL | where signature startswith "ET SCAN " | extend event_type = "suricata_scan"),
-    (Cowrie_CL | where eventid =~ "cowrie.login.success" and (not((username matches regex "^(GET|POST|HEAD|PUT|DELETE|OPTIONS|CONNECT|PATCH) " or (username contains "HTTP/1." or username contains "SIP/2.0" or username contains "RTSP/1.") or (username matches regex "^\\s*$" or isnull(username))))) | extend event_type = "cowrie_login_success")
+    (Cowrie_CL | where eventid =~ "cowrie.login.success" and (not((username matches regex "^(GET|POST|HEAD|PUT|DELETE|OPTIONS|CONNECT|PATCH) " or (username contains "HTTP/1." or username contains "SIP/2.0" or username contains "RTSP/1.") or (username matches regex "^\\s*$" or username =~ "" or isnull(username))))) | extend event_type = "cowrie_login_success")
 | summarize event_type_count = dcount(event_type) by bin(TimeGenerated, 1h), src_ip
 | where event_type_count >= 2

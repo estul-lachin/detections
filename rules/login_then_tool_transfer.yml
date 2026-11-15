@@ -23,9 +23,11 @@ detection:
       - 'HTTP/1.'
       - 'SIP/2.0'
       - 'RTSP/1.'
-  # A missing username is null in the evaluator and Splunk but "" in KQL: exclude both.
+  # Three forms, so the evaluator, Splunk and KQL agree: Splunk's rex can't capture an empty
+  # string (so "" needs its own value), and a missing username is null in the evaluator and Splunk.
   empty_username:
     - username|re: '^\s*$'
+    - username: ''
     - username: null
   condition: selection and not (probe_method or probe_version or empty_username)
 level: informational
