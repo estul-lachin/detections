@@ -61,7 +61,7 @@ def page(title, body, depth, description):
     <div class="crumb"><a class="brand" href="https://uig.me/">Estul Lachin</a><a class="section" href="{rel or './'}">Detections</a></div>
     <nav>
       <a href="https://uig.me/#work" aria-current="page">Work</a>
-      <a href="https://uig.me/incidents/">Incident reports</a>
+      <a href="https://uig.me/writing/">Writing</a>
       <a href="https://uig.me/about/">About</a>
       <a href="https://uig.me/Estul-Lachin-Resume.pdf">Résumé</a>
     </nav>
@@ -271,7 +271,7 @@ def render_index(rules, results, hits=None, soar=None):
 <ul class="rules">{"".join(cards)}</ul>
 <p class="meta">Honeypot #2, a real Debian server, is watched by Wazuh XML rules outside this pipeline:
   <a href="https://github.com/estul-lachin/uig-honeypot/tree/main/hp2">the rules and how each was verified</a>,
-  and the intrusion that led to most of them, <a href="https://uig.me/honeypot/inc-001.html">INC-001</a>.</p>
+  and the intrusion that led to most of them, <a href="https://uig.me/writing/inc-001/">INC-001</a>.</p>
 """
     return page("Detection-as-code · Estul Lachin", body, 0,
                 "Sigma detections for SSH and Telnet attacks and the network traffic around them (Cowrie and "

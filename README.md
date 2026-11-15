@@ -73,7 +73,7 @@ After changing `tools/sigma_eval.py`, copy it to uig-honeypot's `vps/sigma_eval.
    its window, with `now()` set to that end, so the window is bounded on both sides
    (`ingestion_time() > ago(15m) and ingestion_time() <= now()`); with only the lower bound, events ingested in
    those 5 minutes were alerted twice. Hourly runs made a Cowrie event that just missed one wait up to 66 minutes
-   to become an incident ([the incident report](https://uig.me/notes/telnet-dropper-incident/) that found both). Each run raises one alert per source IP (the IP is mapped as an entity
+   to become an incident ([the incident report](https://uig.me/writing/telnet-dropper/) that found both). Each run raises one alert per source IP (the IP is mapped as an entity
    and named in the alert title, with the match count and first/last time as custom details).
    The detection rules raise no incidents themselves. Sentinel groups alerts only within one rule, so one
    dropper session used to open an incident for every rule that caught it (six in the incident report). A
